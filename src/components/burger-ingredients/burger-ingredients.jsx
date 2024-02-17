@@ -25,7 +25,7 @@ export const BurgerIngredients = () => {
     const [current, setCurrent] = React.useState(`${types[0].code}`);
 
     const scrollToBlock = value => {
-        types.find(type => type.code === value)?.ref.current?.scrollIntoView()
+        types.find(type => type.code === value)?.ref.current?.scrollIntoView({behavior: "smooth"})
     }
 
     const onClickTab = value => {
