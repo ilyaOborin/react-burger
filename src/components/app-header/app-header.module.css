@@ -4,13 +4,13 @@
     align-items: center;
 }
 
-.buttons {
+.links {
     display: flex;
     align-items: center;
     column-gap: 8px;
 }
 
-.button {
+.link {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -18,10 +18,10 @@
     border-radius: 40px;
     background: none;
     color: #FFF;
-    cursor: pointer;
+    text-decoration: none;
 }
 
-.button span {
+.link span {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
@@ -29,8 +29,8 @@
     color: currentColor;
 }
 
-.button-secondary {
-    composes: button;
+.link-secondary {
+    composes: link;
     color: #8585AD;
 }
 
