@@ -1,10 +1,10 @@
 import React, {useRef} from "react";
-import styles from "./burger-ingredients.module.css";
 import {IngredientCard} from "../inrgregient-card/ingredient-card";
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
-import data from "../../utils/data";
+import styles from "./burger-ingredients.module.css";
+import PropTypes from "prop-types";
 
-export const BurgerIngredients = () => {
+export const BurgerIngredients = ({ingredients}) => {
     const types = [
         {
             code: 'bun',
@@ -39,7 +39,7 @@ export const BurgerIngredients = () => {
                 {type.name}
             </p>
             <div className={`${styles['block-items']} pb-10 pt-6 pl-4 pr-10`}>
-                {data
+                {ingredients
                     .filter(item => item.type === type.code)
                     .map((item) => <IngredientCard ingredient={item} key={item._id} />)
                 }
@@ -66,4 +66,8 @@ export const BurgerIngredients = () => {
            </div>
        </div>
     )
+}
+
+BurgerIngredients.propTypes = {
+    ingredients: PropTypes.arrayOf(PropTypes.any),
 }
