@@ -1,0 +1,44 @@
+.card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 32px;
+}
+
+.id {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    text-align: center;
+    color: #F2F2F3;
+}
+
+.image {
+    margin: 28px 0;
+    height: 120px;
+}
+
+.image img {
+    object-fit: contain;
+    height: 100%;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.status {
+    composes: id;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.await {
+    composes: id;
+    font-size: 16px;
+    font-weight: 400;
+    color: #8585AD;
+}
