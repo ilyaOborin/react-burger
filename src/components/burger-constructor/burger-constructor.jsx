@@ -1,8 +1,19 @@
-import React from "react";
-import styles from "./burger-constructor.module.css";
+import React, {useEffect, useState} from "react";
 import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Modal} from "../modal/modal";
+import {OrderDetails} from "../order-details/order-details";
+import styles from "./burger-constructor.module.css";
 
 export const BurgerConstructor = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    function handleOpenModal() {
+        setIsOpen(true)
+    }
+
+    function handleCloseModal() {
+        setIsOpen(false)
+    }
+
     return (
         <div className={`${styles.content} pt-25 pl-4 pr-4`}>
             <div className={styles.constructor}>
@@ -80,10 +91,13 @@ export const BurgerConstructor = () => {
                     <p className="text text_type_digits-medium">610</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button htmlType="button" type="primary" size="medium">
+                <Button htmlType="button" type="primary" size="medium" onClick={handleOpenModal}>
                     Оформить заказ
                 </Button>
             </div>
+            {isOpen && (
+                <Modal onClose={handleCloseModal} children={<OrderDetails />}/>
+            )}
         </div>
     )
 }
