@@ -1,27 +1,42 @@
-import React, {useEffect, useState} from "react";
+import React, {useMemo} from "react";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Modal} from "../modal/modal";
-import {IngredientDetails} from "../ingredient-details/ingredient-details";
 import PropTypes from "prop-types";
+import { useDrag } from "react-dnd";
 import styles from "./ingredient-card.module.css";
+import {useSelector} from "react-redux";
 
-export const IngredientCard = ({ingredient}) => {
 
-    const [isOpen, setIsOpen] = useState(false);
-    function handleOpenModal() {
-        setIsOpen(true)
-    }
+export const IngredientCard = ({ingredient, onOpen}) => {
+    const burgerIngredients = useSelector(state => state.burgerIngredients.burgerIngredients);
+    const [{isDragging}, drag] = useDrag({
+        type: "ingredient",
+        item: {ingredient},
+        collect: monitor => ({
+            isDragging: monitor.isDragging()
+        })
+    });
 
-    function handleCloseModal() {
-        setIsOpen(false)
-    }
+    const countIngredients = useMemo(() => {
+        let number = 0;
+        burgerIngredients.forEach(item => {
+            if (item.name === ingredient.name) {
+                number += ingredient.type === "bun" ? 2 : 1;
+            }
+        });
+
+        return number;
+    }, [burgerIngredients]);
+    const count = countIngredients;
+    const border = isDragging ? '2px dashed #ff9900' : '';
 
     return (
         <>
-            <div className={styles.card} onClick={handleOpenModal}>
-                <div className={styles.count}>
-                    <p className="text text_type_digits-default">1</p>
-                </div>
+            <div className={`${styles.card}`} style={{border: border}} onClick={onOpen} ref={drag}>
+                {count !== 0 && (
+                    <div className={styles.count}>
+                        <p className="text text_type_digits-default">{count}</p>
+                    </div>
+                )}
                 <div className={`${styles.img} pl-4 pr-4`}>
                     <img className={`${styles.img} pl-4 pr-4`} src={ingredient.image} alt=""/>
                 </div>
@@ -33,9 +48,6 @@ export const IngredientCard = ({ingredient}) => {
                     {ingredient.name}
                 </p>
             </div>
-            {isOpen && (
-                <Modal onClose={handleCloseModal} children={<IngredientDetails data={ingredient} />} title="Детали ингридиента"/>
-            )}
         </>
     )
 }
