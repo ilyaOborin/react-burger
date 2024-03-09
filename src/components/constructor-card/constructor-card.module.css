@@ -1,0 +1,7 @@
+.list-item {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 8px;
+    width: 100%;
+}
