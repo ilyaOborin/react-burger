@@ -3,6 +3,7 @@
     grid-template-columns: 1fr;
     row-gap: 4px;
     position: relative;
+    border-radius: 40px;
     cursor: pointer;
 }
 

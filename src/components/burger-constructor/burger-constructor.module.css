@@ -29,6 +29,14 @@
     justify-content: flex-end;
 }
 
+.plug {
+    composes: top;
+}
+
+.plug img {
+    visibility: hidden;
+}
+
 .bottom {
     display: flex;
     justify-content: flex-end;
@@ -42,11 +50,4 @@
     overflow: auto;
     margin: 0;
     padding: 0;
-}
-
-.list-item {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    column-gap: 8px;
 }
