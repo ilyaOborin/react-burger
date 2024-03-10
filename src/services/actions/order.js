@@ -1,11 +1,8 @@
-import {SET_INGREDIENT_DATA} from "./current-ingredient";
-
+import {request} from '../../utils/request';
 export const GET_ORDER_NUMBER_REQUEST = 'GET_ORDER_NUMBER_REQUEST';
 export const GET_ORDER_NUMBER_SUCCESS = 'GET_ORDER_NUMBER_SUCCESS';
 export const GET_ORDER_NUMBER_FAILED = 'GET_ORDER_NUMBER_FAILED';
 export const CLOSE_MODAL_ORDER = 'CLOSE_MODAL_ORDER';
-
-const ORDER_URL = 'https://norma.nomoreparties.space/api/orders';
 
 export function getOrderData(order) {
     return function (dispatch) {
@@ -17,20 +14,13 @@ export function getOrderData(order) {
         });
         const orderElementsIds = order.map(ingredient => ingredient._id);
         const orderBody = {ingredients: orderElementsIds};
-        fetch(ORDER_URL, {
+        request('/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(orderBody)
         })
-            .then(res => {
-                if(res.ok) {
-                    return res.json()
-                } else {
-                    throw new Error("Ошибка выполнения запроса");
-                }
-            })
             .then(data => {
                 dispatch({
                     type: GET_ORDER_NUMBER_SUCCESS,

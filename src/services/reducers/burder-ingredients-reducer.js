@@ -1,4 +1,5 @@
 import {
+    CLEAR_INGREDIENTS_BURGER,
     DELETE_INGREDIENT_FROM_BURGER, MOVE_INGREDIENT_IN_BURGER,
     SET_INGREDIENT_TO_BURGER,
 } from "../actions/burgerIngredients";
@@ -43,6 +44,12 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
                 };
             }
             return state
+        }
+        case CLEAR_INGREDIENTS_BURGER: {
+            return {
+                ...state,
+                burgerIngredients: []
+            }
         }
         case MOVE_INGREDIENT_IN_BURGER: {
             const updatedCards = [...state.burgerIngredients];

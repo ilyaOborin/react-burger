@@ -1,14 +1,14 @@
-import React, {useState, useMemo, useCallback} from "react";
+import React, {useMemo, useCallback} from "react";
 import {Button, ConstructorElement, CurrencyIcon, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Modal} from "../modal/modal";
 import {OrderDetails} from "../order-details/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {
+    clearIngredientBurger,
     deleteIngredientFromBurger, moveIngredientsInBurger,
     setIngredientToBurger
 } from "../../services/actions/burgerIngredients";
 import {useDrop} from "react-dnd";
-import { v4 } from 'uuid';
 import styles from "./burger-constructor.module.css";
 import {closeOrderModal, getOrderData} from "../../services/actions/order";
 import {ConstructorCard} from "../constructor-card/constructor-card";
@@ -22,7 +22,8 @@ export const BurgerConstructor = () => {
     }
 
     function handleCloseModal() {
-        dispatch(closeOrderModal())
+        dispatch(closeOrderModal());
+        dispatch(clearIngredientBurger())
     }
 
     const handleDrop = (ingredient) => {
@@ -62,8 +63,8 @@ export const BurgerConstructor = () => {
         return (
             <ConstructorCard
                 item={item}
-                id={item.id}
-                key={v4()}
+                id={item._id}
+                key={item.uniqueId}
                 moveCard={moveCard}
                 index={index}
                 handleDelete={handleDelete}

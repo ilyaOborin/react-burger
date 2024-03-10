@@ -2,6 +2,8 @@ import React, {useRef} from "react";
 import { useDrag, useDrop } from 'react-dnd'
 import styles from "./constructor-card.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
+import {getPropertyTypes} from "../../utils/types";
 
 export const ConstructorCard = ({item, index, handleDelete, moveCard, id}) => {
     const ref = useRef(null)
@@ -55,4 +57,12 @@ export const ConstructorCard = ({item, index, handleDelete, moveCard, id}) => {
             />
         </li>
     )
+}
+
+ConstructorCard.propTypes = {
+    item:getPropertyTypes(),
+    index: PropTypes.number,
+    handleDelete: PropTypes.func.isRequired,
+    moveCard: PropTypes.func,
+    id: PropTypes.any.isRequired
 }
